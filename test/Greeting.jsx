@@ -1,0 +1,1 @@
+const Greeting = ({ name }) => <h1>Ahoj, {name}!</h1>;
