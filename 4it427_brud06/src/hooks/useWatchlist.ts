@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
+import type { Film } from '../types/film.types';
 
-export type Film = {
-    title: string;
-    year: number;
-    genre: string;
-    rating: number;
-    watched: boolean;
-};
+
 
 export function useWatchlist(initialFilms: Film[]) {
     const [films, setFilms] = useState<Film[]>(initialFilms);

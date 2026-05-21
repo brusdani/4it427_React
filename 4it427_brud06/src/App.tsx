@@ -1,8 +1,9 @@
 import './App.css'
 import { FilmCard } from './components/FilmCard'
 import { useWatchlist } from './hooks/useWatchlist';
+import type { Film } from './types/film.types';
 
-const mockFilms = [
+const mockFilms: Film[] = [
     {
         title: "Inception",
         year: 2010,
