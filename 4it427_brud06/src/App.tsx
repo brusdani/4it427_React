@@ -1,5 +1,6 @@
 import './App.css'
 import { FilmCard } from './components/FilmCard'
+import { useWatchlist } from './hooks/useWatchlist';
 
 const mockFilms = [
     {
@@ -26,28 +27,26 @@ const mockFilms = [
 ];
 
 function App() {
-    const handleToggleWatched = (title: string) => {
-        console.log(`Kliknuto na změnu stavu zhlédnutí u filmu: ${title}`);
-    };
+    const { films, toggleWatched, markAllAsWatched } = useWatchlist(mockFilms);
     return (
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+        <div>
             <h1>Film Watchlist</h1>
 
+            <button onClick={markAllAsWatched}>
+                Označit vše jako zhlédnuté
+            </button>
+
             <div>
-                {mockFilms.map((film, index) => (
+                {films.map((film) => (
                     <FilmCard
-                        key={index}
-                        title={film.title}
-                        year={film.year}
-                        genre={film.genre}
-                        rating={film.rating}
-                        watched={film.watched}
-                        onToggleWatched={handleToggleWatched}
+                        key={film.title}
+                        {...film}
+                        onToggleWatched={toggleWatched}
                     />
                 ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default App
