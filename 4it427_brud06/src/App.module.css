@@ -96,6 +96,38 @@
     align-items: center;
     gap: 12px;
 }
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.navLink {
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    font-weight: 600;
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.navLink:hover {
+    transform: translateY(-1px);
+    border-color: var(--color-primary);
+}
+
+.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
 
 @media (max-width: 600px) {
     .app {

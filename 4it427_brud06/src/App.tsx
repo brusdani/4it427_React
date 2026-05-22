@@ -1,15 +1,12 @@
 /* Stylingová metoda: CSS Modules */
 
-import styles from './App.module.css';
-import { FilmCard } from './components/FilmCard';
-import { useWatchlist } from './context/WatchlistContext';
-import { AddFilmForm } from './components/AddFilmForm';
 import { useState } from 'react';
+import styles from './App.module.css';
+import { Navigate, Route, Routes, NavLink } from 'react-router-dom';
+import { WatchlistPage } from './pages/WatchlistPage';
+import {AddFilmPage} from "./pages/AddFilmPage.tsx";
 
 function App() {
-    const { films, toggleWatched, markAllAsWatched, removeFilm } = useWatchlist();
-    const watchedCount = films.filter((film) => film.watched).length;
-    const totalCount = films.length;
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleTheme = () => {
@@ -27,35 +24,35 @@ function App() {
                 >
                     {isDarkMode ? 'Světlý režim' : 'Tmavý režim'}
                 </button>
+
                 <h1 className={styles.title}>Film Watchlist</h1>
-
-                <div className={styles.headerActions}>
-                    <p className={styles.counter}>
-                        {watchedCount} / {totalCount} zhlédnuto
-                    </p>
-
-                    <button
-                        type="button"
-                        className={styles.primaryButton}
-                        onClick={markAllAsWatched}
+                <nav className={styles.nav}>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+                        }
                     >
-                        Označit vše jako zhlédnuté
-                    </button>
-                </div>
+                        Můj watchlist
+                    </NavLink>
+
+                    <NavLink
+                        to="/form"
+                        className={({ isActive }) =>
+                            isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+                        }
+                    >
+                        Přidat film
+                    </NavLink>
+                </nav>
             </header>
 
-            <AddFilmForm />
+            <Routes>
+                <Route path="/" element={<WatchlistPage />} />
+                <Route path="/form" element={<AddFilmPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
 
-            <main className={styles.grid}>
-                {films.map((film) => (
-                    <FilmCard
-                        key={film.id}
-                        {...film}
-                        onToggleWatched={toggleWatched}
-                        onRemove={removeFilm}
-                    />
-                ))}
-            </main>
         </div>
     );
 }

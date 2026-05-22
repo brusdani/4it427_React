@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWatchlist } from '../context/WatchlistContext';
+import { useNavigate } from 'react-router-dom';
 import styles from './AddFilmForm.module.css';
 
 export function AddFilmForm() {
@@ -8,6 +9,14 @@ export function AddFilmForm() {
     const [year, setYear] = useState('');
     const [genre, setGenre] = useState('');
     const [rating, setRating] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
+
+    const clearSuccessMessage = () => {
+        if (successMessage) {
+            setSuccessMessage('');
+        }
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -19,15 +28,23 @@ export function AddFilmForm() {
             rating: Number(rating),
         });
 
+        setSuccessMessage(`Film ${title} byl přidán do watchlistu.`);
+
         setTitle('');
         setYear('');
         setGenre('');
         setRating('');
+
+        navigate('/');
     };
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <h2 className={styles.title}>Přidat film</h2>
+
+            {successMessage && (
+                <p className={styles.successMessage}>{successMessage}</p>
+            )}
 
             <div className={styles.fields}>
                 <label className={styles.field}>
@@ -36,7 +53,10 @@ export function AddFilmForm() {
                         className={styles.input}
                         type="text"
                         value={title}
-                        onChange={(event) => setTitle(event.target.value)}
+                        onChange={(event) => {
+                            setTitle(event.target.value);
+                            clearSuccessMessage();
+                        }}
                         required
                     />
                 </label>

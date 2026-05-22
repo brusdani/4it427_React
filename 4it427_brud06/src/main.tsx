@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { WatchlistProvider } from './context/WatchlistContext'
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <WatchlistProvider>
-          <App />
-      </WatchlistProvider>
+      <BrowserRouter>
+          <WatchlistProvider>
+              <App />
+          </WatchlistProvider>
+      </BrowserRouter>
   </StrictMode>,
 )
