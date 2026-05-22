@@ -1,0 +1,112 @@
+.app {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.title {
+    margin: 0 0 12px;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    color: var(--color-heading);
+}
+
+.counter {
+    display: inline-block;
+    margin: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(147, 51, 234, 0.1);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.primaryButton {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    background: var(--color-primary);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+            transform 0.15s ease,
+            opacity 0.15s ease,
+            background-color 0.15s ease;
+}
+
+.primaryButton:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.primaryButton:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+}
+.themeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: var(--color-surface);
+    color: var(--color-heading);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+            transform 0.15s ease,
+            border-color 0.15s ease,
+            background-color 0.15s ease;
+}
+
+.themeButton:hover {
+    transform: translateY(-1px);
+    border-color: var(--color-primary);
+}
+
+.themeButton:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+.main {
+    margin-top: 32px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+.headerActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .app {
+        padding: 24px 14px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

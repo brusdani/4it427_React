@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWatchlist } from '../context/WatchlistContext';
+import styles from './AddFilmForm.module.css';
 
 export function AddFilmForm() {
     const { addFilm } = useWatchlist();
@@ -23,48 +24,49 @@ export function AddFilmForm() {
         setGenre('');
         setRating('');
     };
+
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '24px' }}>
-            <div>
-                <label>
-                    Název filmu:
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <h2 className={styles.title}>Přidat film</h2>
+
+            <div className={styles.fields}>
+                <label className={styles.field}>
+                    <span className={styles.label}>Název filmu</span>
                     <input
+                        className={styles.input}
                         type="text"
                         value={title}
                         onChange={(event) => setTitle(event.target.value)}
                         required
                     />
                 </label>
-            </div>
 
-            <div>
-                <label>
-                    Rok:
+                <label className={styles.field}>
+                    <span className={styles.label}>Rok</span>
                     <input
+                        className={styles.input}
                         type="number"
                         value={year}
                         onChange={(event) => setYear(event.target.value)}
                         required
                     />
                 </label>
-            </div>
 
-            <div>
-                <label>
-                    Žánr:
+                <label className={styles.field}>
+                    <span className={styles.label}>Žánr</span>
                     <input
+                        className={styles.input}
                         type="text"
                         value={genre}
                         onChange={(event) => setGenre(event.target.value)}
                         required
                     />
                 </label>
-            </div>
 
-            <div>
-                <label>
-                    Hodnocení:
+                <label className={styles.field}>
+                    <span className={styles.label}>Hodnocení</span>
                     <input
+                        className={styles.input}
                         type="number"
                         value={rating}
                         onChange={(event) => setRating(event.target.value)}
@@ -75,7 +77,7 @@ export function AddFilmForm() {
                 </label>
             </div>
 
-            <button type="submit" style={{ marginTop: '8px' }}>
+            <button type="submit" className={styles.submitButton}>
                 Přidat film
             </button>
         </form>
