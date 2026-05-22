@@ -1,48 +1,34 @@
 import './App.css'
 import { FilmCard } from './components/FilmCard'
-import { useWatchlist } from './hooks/useWatchlist';
-import type { Film } from './types/film.types';
-
-const mockFilms: Film[] = [
-    {
-        title: "Inception",
-        year: 2010,
-        genre: "Sci-Fi / Thriller",
-        rating: 9,
-        watched: true,
-    },
-    {
-        title: "The Godfather)",
-        year: 1972,
-        genre: "Krimi / Drama",
-        rating: 12,
-        watched: false,
-    },
-    {
-        title: "Pulp Fiction",
-        year: 1994,
-        genre: "Krimi",
-        rating: 9,
-        watched: true,
-    }
-];
+import { useWatchlist } from './context/WatchlistContext';
+import { AddFilmForm } from './components/AddFilmForm';
 
 function App() {
-    const { films, toggleWatched, markAllAsWatched } = useWatchlist(mockFilms);
+    const { films, toggleWatched, markAllAsWatched, removeFilm } = useWatchlist();
+    const watchedCount = films.filter((film) => film.watched).length;
+    const totalCount = films.length;
+
     return (
         <div>
             <h1>Film Watchlist</h1>
+
+            <p>
+                {watchedCount} / {totalCount} zhlédnuto
+            </p>
 
             <button onClick={markAllAsWatched}>
                 Označit vše jako zhlédnuté
             </button>
 
+            <AddFilmForm />
+
             <div>
                 {films.map((film) => (
                     <FilmCard
-                        key={film.title}
+                        key={film.id}
                         {...film}
                         onToggleWatched={toggleWatched}
+                        onRemove={removeFilm}
                     />
                 ))}
             </div>

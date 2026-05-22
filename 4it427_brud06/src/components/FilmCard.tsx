@@ -1,20 +1,23 @@
 //comment to fix commit message
 interface FilmCardProps {
+    id: string;
     title: string,
     year: number,
     genre: string,
     rating: number,
     watched: boolean,
-    onToggleWatched: (title: string) => void;
+    onToggleWatched: (id: string) => void,
+    onRemove: (id: string) => void;
 }
 
-export function FilmCard({
+export function FilmCard({   id,
                              title,
                              year,
                              genre,
                              rating,
                              watched,
                              onToggleWatched,
+                             onRemove,
                          }: FilmCardProps) {
 
     const isRatingValid = rating >= 1 && rating <= 10;
@@ -37,10 +40,16 @@ export function FilmCard({
             )}
 
             <button
-                onClick={() => onToggleWatched(title)}
+                onClick={() => onToggleWatched(id)}
                 style={{ padding: '8px 12px', cursor: 'pointer', marginTop: '8px' }}
             >
                 Změnit stav zhlédnutí
+            </button>
+            <button
+                onClick={() => onRemove(id)}
+                style={{ padding: '8px 12px', cursor: 'pointer', marginTop: '8px', marginLeft: '8px' }}
+            >
+                Odebrat
             </button>
         </div>
     );
